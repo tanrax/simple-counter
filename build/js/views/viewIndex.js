@@ -1,0 +1,1 @@
+define(["text!../../templates/templateIndex.html"],function(e){return Backbone.View.extend({el:"#app-container",template:_.template(e),initialize:function(){this.render()},render:function(){this.$el.html(this.template())}})});

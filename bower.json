@@ -1,0 +1,29 @@
+{
+  "name": "contador",
+  "description": "contador simple",
+  "main": "gulpfile.js",
+  "authors": [
+    "Andros Fenollosa"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "homepage": "programadorwebvalencia.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.2.3",
+    "requirejs": "~2.1.22",
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.1.4",
+    "text": "~2.0.14"
+  }
+}
