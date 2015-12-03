@@ -9,6 +9,6 @@ define(['views/viewIndex'], function(ViewIndex) {
 		},
 		error404Router: function() {
 			//miView = new View404();
-		},
+		}
 	});
 });

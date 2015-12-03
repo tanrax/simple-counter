@@ -1,0 +1,1 @@
+define(function(){return Backbone.Model.extend({initialize:function(n){console.log("modelo iniciado "+n.hola)}})});

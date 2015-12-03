@@ -8,6 +8,7 @@ requirejs.config({
 		text: 'core/text',
 		urls: 'urls',
 		viewIndex: 'views/viewIndex',
+		modelIndex: 'models/modelIndex'
     },
     shim: {
         underscore: {
@@ -25,6 +26,9 @@ requirejs.config({
 		},
 		viewIndex: {
 			deps: ['urls']
+		},
+		modelIndex: {
+			deps: ['viewIndex']
 		}
 	}
 });
