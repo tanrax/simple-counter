@@ -10,10 +10,10 @@ var notify = require('gulp-notify');
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var image = require('gulp-image');
-var cleanDest = require('gulp-clean-dest');
 var htmlmin = require('gulp-htmlmin');
 var sourcemaps = require('gulp-sourcemaps');
 var react = require('gulp-react');
+var clean = require('gulp-clean');
 
 // Variables
 var sURL = 'test.dev/contador/build';
@@ -21,12 +21,12 @@ var sURLResources = 'src/'
 var sURLRelease = 'build/'
 
 var aCore = [
-            './bower_components/jquery/dist/jquery.min.js',
-			'./bower_components/underscore/underscore-min.js',
-			'./bower_components/backbone/backbone-min.js',
-			'./bower_components/requirejs/require.js',
-			'./bower_components/text/text.js',
-        ];
+    './bower_components/jquery/dist/jquery.min.js',
+    './bower_components/underscore/underscore-min.js',
+    './bower_components/backbone/backbone-min.js',
+    './bower_components/requirejs/require.js',
+    './bower_components/text/text.js',
+];
 
 gulp.task('browser-sync', function() {
     browserSync.init({
@@ -34,14 +34,16 @@ gulp.task('browser-sync', function() {
     });
 });
 
-gulp.task('clean', function() {
-    return cleanDest(sURLRelease);
+gulp.task('del', function() {
+    return gulp.src(sURLRelease + '**/*')
+        .pipe(clean({
+            force: true
+        }));
 });
 
 gulp.task('html', function() {
     return gulp.src([
-            sURLResources + 'html/*.html',
-            sURLResources + 'html/templates/*.html'
+            sURLResources + 'html/**/*.html',
         ])
         .pipe(htmlmin({
             collapseWhitespace: true
@@ -99,25 +101,25 @@ gulp.task('js', function() {
         .pipe(react())
         .on('error', function(err) {
             notify.onError({
-				title: 'React',
-				message: '<%= error.message %>'
-			})(err);
-			this.emit('end');
-			console.error('React: ', err.message);
-		})
-		.pipe(babel())
-		.on('error', function(err) {
-			notify.onError({
-				title: 'Babel',
-				message: '<%= error.message %>'
+                title: 'React',
+                message: '<%= error.message %>'
+            })(err);
+            this.emit('end');
+            console.error('React: ', err.message);
+        })
+        .pipe(babel())
+        .on('error', function(err) {
+            notify.onError({
+                title: 'Babel',
+                message: '<%= error.message %>'
 
-			})(err);
-			this.emit('end');
-			console.error('Babel: ', err.message);
-		})
-		.pipe(uglify())
-		.pipe(gulp.dest(sURLRelease + 'js'))
-		.pipe(browserSync.stream());
+            })(err);
+            this.emit('end');
+            console.error('Babel: ', err.message);
+        })
+        .pipe(uglify())
+        .pipe(gulp.dest(sURLRelease + 'js'))
+        .pipe(browserSync.stream());
 });
 
 gulp.task('imageDev', function() {
@@ -158,5 +160,6 @@ gulp.task('watch', function() {
     gulp.watch(sURLResources + 'fonts/**/*', ['fonts']).on('change', browserSync.reload);
 });
 
-gulp.task('production', ['clean', 'css', 'js', 'jsCore', 'fonts', 'imagePro']);
-gulp.task('default', ['browser-sync', 'js', 'fonts', 'imageDev', 'css', 'watch']);
+gulp.task('del', ['del']);
+gulp.task('production', ['html', 'css', 'js', 'jsCore', 'fonts', 'imagePro']);
+gulp.task('default', ['browser-sync', 'html', 'js', 'fonts', 'imageDev', 'css', 'watch']);
