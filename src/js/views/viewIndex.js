@@ -8,7 +8,7 @@ define([
 		template: _.template(templateIndex),
 		initialize: function() {
 			this.render();
-			this.model.on('change', this.render, this);
+			this.listenTo(this.model, 'change', this.render);
 		},
 		render: function() {
 			this.$el.html(this.template({

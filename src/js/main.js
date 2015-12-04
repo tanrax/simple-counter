@@ -23,12 +23,6 @@ requirejs.config({
 		},
 		urls: {
 			deps: ['backbone']
-		},
-		viewIndex: {
-			deps: ['urls']
-		},
-		modelIndex: {
-			deps: ['viewIndex']
 		}
 	}
 });
