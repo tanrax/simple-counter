@@ -12,14 +12,13 @@ define([
 		},
 		render: function() {
 			this.$el.html(this.template({
-				'counter': this.model.get('counter')
+				'counter': this.model.getContForm()
 			}));
 		},
 		events: {
 			'click #aumentar': 'aumentar',
 			'click #disminuir': 'disminuir',
-			'click #resetear': 'resetear',
-			'click #ayuda': 'ayuda'
+			'click #resetear': 'resetear'
 		},
 		aumentar: function() {
 			this.model.aumentarContador();
@@ -29,8 +28,6 @@ define([
 		},
 		resetear: function() {
 			this.model.resetearContador();
-		},
-		ayuda: function() {
 		}
 	});
 });

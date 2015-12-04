@@ -1,0 +1,73 @@
+//Colores
+$colorBlanco: white;
+$colorNegro: black;
+$colorVerde: #468966;
+$colorAmarilloClaro: #FFF0A5;
+$colorAmarilloOscuro: #FFB03B;
+$colorNaranja: #B64926;
+$colorRojo: #8E2800;
+
+@font-face {
+	font-family: contador;
+	src: url(../fonts/SCOREBOARD.ttf);
+}
+body {
+	background-color: $colorVerde;
+}
+#contador {
+	background-color: $colorBlanco;
+	line-height: 2em;
+	font-family: contador;
+	font-size: 8em;
+	text-align: center;
+}
+
+.btn-default {
+	border-color: initial !important;
+	border: 0;
+}
+
+#aumentar {
+	float: right;
+	width: 50%;
+	height: 300px;
+	font-size: 3em;
+	background-color: $colorAmarilloClaro;
+}
+
+#disminuir {
+	float: left;
+	width: 50%;
+	height: 150px;
+	font-size: 3em;
+	background-color: $colorAmarilloOscuro;
+}
+
+#resetear {
+	float: left;
+	width: 50%;
+	height: 75px;
+	font-size: 3em;
+	background-color: $colorRojo;
+}
+
+#ayuda {
+
+	float: left;
+	width: 50%;
+	height: 75px;
+	font-size: 3em;
+	background-color: $colorNaranja;
+}
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+	outline: none;
+	color: initial;
+	background-color: initial;
+	border-color: none;
+}
+.btn-default:hover {
+	color: initial;
+	background-color: initial;
+	border-color: none;
+}

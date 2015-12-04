@@ -58,14 +58,11 @@ gulp.task('sass', function() {
             notify.onError({
                 title: 'Sass',
                 message: '<%= error.message %>',
-
             })(err);
             this.emit('end');
             console.error('Sass: ', err.message);
-
         })
         .pipe(gulp.dest(sURLResources + 'css'));
-
 });
 
 gulp.task('css', ['sass'], function() {

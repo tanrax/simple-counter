@@ -5,7 +5,8 @@ define(function() {
 		 * Variables
 		 */
 		defaults: {
-			counter: 0
+			counter: 0,
+			numCifrasMax: 5
 		},
 
 		/**
@@ -36,6 +37,18 @@ define(function() {
 		 */
 		resetearContador: function() {
 			this.set('counter', 0);
+		},
+
+		/**
+		 * Get contador formateado
+		 */
+		getContForm: function() {
+			var sCount = this.get('counter') + '';
+			var iNumCont = sCount.length;
+			for(var i = iNumCont; i < this.get('numCifrasMax'); i++) {
+				sCount = '0' + sCount;	
+			}
+			return sCount;
 		}
     })
 });
