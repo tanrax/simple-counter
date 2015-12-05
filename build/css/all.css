@@ -63,3 +63,20 @@ body {
   color: initial;
   background-color: initial;
   border-color: none; }
+
+#sectionAyuda {
+  text-align: center;
+  word-break: break-all; }
+  #sectionAyuda h1 {
+    font-size: 3em;
+    color: #8E2800; }
+  #sectionAyuda h2 {
+    font-size: 2em;
+    color: white; }
+  #sectionAyuda a {
+    font-size: 1em; }
+  #sectionAyuda button {
+    background-color: #FFB03B;
+    color: #8E2800;
+    width: 100%;
+    font-size: 3em; }

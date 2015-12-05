@@ -12,33 +12,49 @@ var uglify = require('gulp-uglify');
 var image = require('gulp-image');
 var htmlmin = require('gulp-htmlmin');
 var sourcemaps = require('gulp-sourcemaps');
-var react = require('gulp-react');
-var clean = require('gulp-clean');
 
 // Variables
 var sURL = 'test.dev/contador/build';
 var sURLResources = 'src/'
 var sURLRelease = 'build/'
 
-var aCore = [
+var aCoreJS = [
     './bower_components/jquery/dist/jquery.min.js',
     './bower_components/underscore/underscore-min.js',
     './bower_components/backbone/backbone-min.js',
+	'./bower_components/bootstrap/dist/js/bootstrap.min.js',
     './bower_components/requirejs/require.js',
     './bower_components/text/text.js',
 ];
+
+var aCoreCSS = [
+	'./bower_components/bootstrap/dist/css/bootstrap.min.css',
+	'./bower_components/font-awesome/css/font-awesome.min.css',
+];
+
+var aCoreFonts = [
+	'./bower_components/font-awesome/fonts/*',
+]
+
+gulp.task('bowerJS', function() {
+    return gulp.src(aCoreJS)
+        .pipe(gulp.dest(sURLResources + 'js/core'));
+});
+
+gulp.task('bowerCSS', function() {
+    return gulp.src(aCoreCSS)
+        .pipe(gulp.dest(sURLResources + 'css'));
+});
+
+gulp.task('bowerFonts', function() {
+    return gulp.src(aCoreCSS)
+        .pipe(gulp.dest(sURLResources + 'fonts'));
+});
 
 gulp.task('browser-sync', function() {
     browserSync.init({
         proxy: sURL
     });
-});
-
-gulp.task('del', function() {
-    return gulp.src(sURLRelease + '**/*')
-        .pipe(clean({
-            force: true
-        }));
 });
 
 gulp.task('html', function() {
@@ -65,7 +81,7 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(sURLResources + 'css'));
 });
 
-gulp.task('css', ['sass'], function() {
+gulp.task('css', ['sass', 'bowerCSS'], function() {
     return gulp.src([
             sURLResources + 'css/bootstrap.min.css',
             sURLResources + 'css/!(bootstrap.min)*.css',
@@ -74,36 +90,13 @@ gulp.task('css', ['sass'], function() {
         .pipe(autoprefixer())
         .pipe(gulp.dest(sURLRelease + 'css'))
         .pipe(browserSync.stream());
-
 });
 
-gulp.task('bower', function() {
-    return gulp.src(aCore)
-        .pipe(gulp.dest(sURLResources + 'js/core'));
-});
-
-gulp.task('jsCore', ['bower'], function() {
-    return gulp.src([
-            sURLResources + 'js/core/*.js',
-
-        ])
-        .pipe(gulp.dest(sURLRelease + 'js/core'));
-});
-
-gulp.task('js', function() {
+gulp.task('js', ['bowerJS'], function() {
     return gulp.src([
             sURLResources + 'js/*.js',
             sURLResources + 'js/**/*.js'
         ])
-        .pipe(react())
-        .on('error', function(err) {
-            notify.onError({
-                title: 'React',
-                message: '<%= error.message %>'
-            })(err);
-            this.emit('end');
-            console.error('React: ', err.message);
-        })
         .pipe(babel())
         .on('error', function(err) {
             notify.onError({
@@ -127,7 +120,7 @@ gulp.task('imageDev', function() {
         .pipe(gulp.dest(sURLRelease + 'img'));
 });
 
-gulp.task('fonts', function() {
+gulp.task('fonts', ['bowerFonts'], function() {
     return gulp.src([
             sURLResources + 'fonts/*',
             sURLResources + 'fonts/**/*'
@@ -152,11 +145,9 @@ gulp.task('watch', function() {
     gulp.watch(sURLResources + 'css/*.css', ['css']).on('change', browserSync.reload);
     gulp.watch(sURLResources + 'js/*.js', ['js']).on('change', browserSync.reload);
     gulp.watch(sURLResources + 'js/**/*.js', ['js']).on('change', browserSync.reload);
-    gulp.watch(sURLResources + 'js/core/*.js', ['jsCore']).on('change', browserSync.reload);
     gulp.watch(sURLResources + 'img/**/*', ['imageDev']).on('change', browserSync.reload);
     gulp.watch(sURLResources + 'fonts/**/*', ['fonts']).on('change', browserSync.reload);
 });
 
-gulp.task('del', ['del']);
-gulp.task('production', ['html', 'css', 'js', 'jsCore', 'fonts', 'imagePro']);
+gulp.task('production', ['html', 'css', 'js', 'fonts', 'imagePro']);
 gulp.task('default', ['browser-sync', 'html', 'js', 'fonts', 'imageDev', 'css', 'watch']);

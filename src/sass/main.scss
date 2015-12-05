@@ -71,3 +71,25 @@ body {
 	background-color: initial;
 	border-color: none;
 }
+
+#sectionAyuda {
+	text-align: center;
+	word-break: break-all;
+	h1 {
+		font-size: 3em;
+		color: $colorRojo;
+	}
+	h2 {
+		font-size: 2em;
+		color: $colorBlanco;
+	}
+	a {
+		font-size: 1em;
+	}
+	button {
+		background-color: $colorAmarilloOscuro;
+		color: $colorRojo;
+		width: 100%;
+		font-size: 3em;
+	}
+}

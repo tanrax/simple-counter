@@ -14,7 +14,7 @@ define([
 			this.view = new ViewIndex();
 		},
 		ayuda: function() {
-			this.view.undelegateEvents();
+			if(this.view != null) this.view.undelegateEvents();
 			this.view = new ViewAyuda();
 		},
 		error404Router: function() {
