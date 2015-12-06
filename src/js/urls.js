@@ -6,19 +6,19 @@ define([
 		routes: {
 			'': 'index', // Index
 			'ayuda': 'ayuda', // Ayuda
-			'*default': 'error404Router', // 404
+			'*default': 'index', // 404
 		},
 		view: null,
 		index: function() {
-			if(this.view != null) this.view.undelegateEvents();
+			this.fixEvents();
 			this.view = new ViewIndex();
 		},
 		ayuda: function() {
-			if(this.view != null) this.view.undelegateEvents();
+			this.fixEvents();
 			this.view = new ViewAyuda();
 		},
-		error404Router: function() {
-			//miView = new View404();
+		fixEvents: function() {
+			if(this.view != null) this.view.undelegateEvents();
 		}
 	});
 });
