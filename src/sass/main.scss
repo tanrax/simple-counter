@@ -7,13 +7,57 @@ $colorAmarilloOscuro: #FFB03B;
 $colorNaranja: #B64926;
 $colorRojo: #8E2800;
 
+// Variables
+$tamanyoCargando: 10px;
+
+// Fonts
 @font-face {
 	font-family: contador;
 	src: url(../fonts/SCOREBOARD.ttf);
 }
+
+// Animations
+@keyframes cargando {
+	0% {
+	    width: 10px;
+	    height: 10px;
+	    opacity: 0.9;
+	    transform: translateY(0);
+	}
+	100% {
+	    width: 24px;
+	    height: 24px;
+	    opacity: 0.1;
+	    transform: translateY(-21px);
+	}
+}
+
 body {
 	background-color: $colorVerde;
 }
+
+#cargando {
+	position: absolute;
+	top: calc(50% - #{$tamanyoCargando} / 2);
+	left: calc(50% - #{$tamanyoCargando} * 3 / 2);
+	span {
+		display: inline-block;
+		vertical-align: middle;
+		width: $tamanyoCargando;
+		height: $tamanyoCargando;
+		background: $colorAmarilloOscuro;
+		border-radius: 50px;
+		animation: cargando 0.9s infinite alternate;
+		&:nth-of-type(2) {
+			animation-delay: 0.3s;
+		}
+		&:nth-of-type(3) {
+			animation-delay: 0.6s;
+
+		}
+	}
+}
+
 #contador {
 	background-color: $colorBlanco;
 	line-height: 2em;
