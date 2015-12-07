@@ -1,0 +1,1 @@
+define(["text!../../templates/templateAyuda.html","../models/modelAyuda"],function(e,t){return Backbone.View.extend({el:"#app-container",model:new t,template:_.template(e),initialize:function(){this.render(),this.model.on("change",this.render,this)},render:function(){this.$el.html(this.template())}})});

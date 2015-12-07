@@ -1,5 +1,5 @@
 bower_components
 node_modules
 .sass-cache
-app
+cordova/platforms
 src/js/core

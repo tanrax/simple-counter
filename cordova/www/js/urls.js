@@ -1,0 +1,1 @@
+define(["views/viewIndex","views/viewAyuda"],function(e,i){return Backbone.Router.extend({routes:{"":"index",ayuda:"ayuda","*default":"index"},view:null,index:function(){this.fixEvents(),this.view=new e},ayuda:function(){this.fixEvents(),this.view=new i},fixEvents:function(){null!=this.view&&this.view.undelegateEvents()}})});
